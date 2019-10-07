@@ -1,4 +1,5 @@
 import queue
+import re
 import threading
 
 from lxml import etree
@@ -12,10 +13,9 @@ def file(img, img_num):
 
 
 def r_dow(url, img_num):
-    print(url)
-    link = url[52:]
+    link = re.findall('https://img1.gamersky.com.+', url)
     try:
-        img = requests.get(link)
+        img = requests.get(link[0])
         img = img.content
         file(img, img_num)
         print(img_num)
